@@ -1,5 +1,5 @@
 # Lightprint
-Ligthprint protocol is a new type of communication and a handshake between devices
+Lightprint protocol is a new type of communication and a handshake between devices
 ## License
 
 This project is licensed under the **Lightprint License 1.0**.  
