@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Lightprint</h2>
+  
+  <div class="controls">
+      <div class="setting-switch">
+          <label>Role:</label>
+          <select id="role-switcher">
+              <option value="receiver" selected>Receiver</option>
+              <option value="transmitter">Transmitter</option>
+          </select>
+      </div>
+  </div>
+
+  <div class="main-display">
+    <video id="cam" autoplay playsinline muted></video>
+    <canvas id="roi-overlay"></canvas>
+    <div id="transmitter" class="hidden"></div>
+  </div>
+  
+  <div id="receiver-controls">
+      <div class="controls">
+        <div id="auth-controls">
+            <button id="enrollBtn">Enroll</button>
+            <button id="verifyBtn">Verify</button>
+        </div>
+        <button id="receiveBtn" class="hidden">Start Receive</button>
+        <button id="clearBtn">Clear</button>
+        <button id="switchCamBtn">Switch Cam</button>
+      </div>
+      <div class="controls">
+          <div class="setting-switch">
+            <label>Mode:</label>
+            <select id="signalType">
+                <option value="flicker" selected>Screen (Flicker)</option>
+                <option value="stable">Flashlight (Stable)</option>
+                <option value="data">Data Receiving (CS4)</option>
+            </select>
+          </div>
+      </div>
+  </div>
+  
+  <div id="transmitter-controls" class="controls hidden">
+      <textarea id="data-to-send" rows="2">Test 123!</textarea>
+      <button id="sendBtn">Send</button>
+  </div>
+  
+  <div id="progressWrap"><div id="progressFill"></div></div>
+  <div id="statusWrap"><p id="status">Status: Initializing...</p></div>
+  <p class="small" id="info">Select a role and follow the instructions.</p>
+  <div id="plots"></div>
+</div>
+
+<canvas id="frame" style="display:none;"></canvas>
