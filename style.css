@@ -1,0 +1,211 @@
+/* --- Global Variables and Reset --- */
+:root {
+    --accent-color: #007AFF;
+    --accent-color-light: #e6f2ff;
+    --success-color: #34C759;
+    --error-color: #FF3B30;
+    --warn-color: #FF9500;
+    --bg-color: #EFEFF4;
+    --surface-color: #FFFFFF;
+    --text-color-primary: #1D1D1F;
+    --text-color-secondary: #8A8A8E;
+    --border-color: #D1D1D6;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --shadow-color-strong: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    margin: 0;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    color: var(--text-color-primary);
+    background-color: var(--bg-color);
+}
+
+/* --- Main Container --- */
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    background: var(--surface-color);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px var(--shadow-color), 0 5px 15px var(--shadow-color-strong);
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+}
+
+/* --- Display (Camera/Transmitter) --- */
+.main-display {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* 4:3 */
+    margin: auto;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #111;
+    box-shadow: inset 0 4px 8px rgba(0,0,0,0.15); /* Inner shadow */
+}
+video, #roi-overlay, #transmitter {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#roi-overlay {
+    --roi-color: rgba(255, 50, 50, 0.8);
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.6);
+    animation: pulsate 2.5s infinite ease-in-out;
+    border: 3px solid var(--roi-color);
+    transition: border-color 0.3s;
+}
+
+/* --- Buttons and Controls --- */
+.controls {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    background-color: var(--accent-color-light);
+    color: var(--accent-color);
+}
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
+}
+button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: none;
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Main action buttons */
+#enrollBtn, #sendBtn, #receiveBtn {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+/* --- Switches (Select) --- */
+.setting-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-color: #f9f9f9;
+}
+.setting-switch label {
+    color: var(--text-color-secondary);
+    font-weight: 500;
+}
+.setting-switch select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-color-primary);
+    padding-right: 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238A8A8E'%3E%3Cpath d='M6 9L.5 3h11L6 9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/* --- Status and Progress --- */
+#statusWrap {
+    margin-top: 16px;
+    font-weight: 600;
+    min-height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+#progressWrap {
+    width: 100%;
+    margin: 12px auto;
+  #progressWrap {
+    height: 8px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+#progressFill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-color);
+    transition: width 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.small {
+    font-size: 13px;
+    color: var(--text-color-secondary);
+    margin-bottom: 16px;
+}
+
+/* --- Transmitter Controls --- */
+#transmitter-controls {
+    width: 100%;
+}
+#transmitter-controls textarea {
+    width: calc(100% - 110px);
+    min-height: 48px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    font-size: 16px;
+    resize: vertical;
+}
+#transmitter-controls textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+}
+
+/* --- Loading Spinner --- */
+.loading {
+    position: relative;
+    color: transparent !important;
+}
+.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px; height: 20px;
+    top: 0; bottom: 0; left: 0; right: 0;
+    margin: auto;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spinner .8s linear infinite;
+}
+
+.hidden { display: none !important; }
+  
